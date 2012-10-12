@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<html>
+<head>
+	
+	<title>Circles</title>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	
+	<script type="text/javascript" src="js/util.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	
+</head>
+<body>
+	
+	<div id="controls">
+		<form id="form">
+		
+			<div class="field">
+				<label>Image url</label>
+				<span class="more">
+					<span>&#x25bc;</span>
+					<div id="more_list">
+						<strong>Static</strong>
+						<ul>
+							<li><a href="images/presets/skycross.jpg">Blue Sky</a></li>
+							<li><a href="images/presets/sunset.jpg">Sunset</a></li>
+							<li><a href="images/presets/sunset2.jpg">Sunset 2</a></li>
+							<li><a href="images/presets/storm.jpg">Storm</a></li>
+							<li><a href="images/presets/twilight.jpg">Twilight</a></li>
+							<li><a href="images/presets/river.jpg">River</a></li>
+						</ul>
+						<strong>Animated</strong>
+						<ul>
+							<li><a href="images/presets/explosion.gif">Explosion</a></li>
+						</ul>
+					</div>
+				</span>
+				<input type="text" name="imageurl" id="imageurl" class="plain" value="images/presets/sunset.jpg" tabindex="100" />
+			</div>
+			
+			<div class="field">
+				<label for="imagesize">Size</label>
+				<input type="number" name="imagesize" id="imagesize" class="plain" value="600" step="50" min="100" tabindex="200" />
+			</div>
+			
+			<div class="field">
+				<label for="tile">Count</label>
+				<input type="number" name="count" id="count" class="plain" value="10" step="1" min="1" max="2000" tabindex="300" />
+			</div>
+			
+			<div class="field">
+				<label>Rotation increment</label>
+				<input type="number" name="rotation" id="rotation" class="plain" value="5" step="0.5" tabindex="400" />
+			</div>
+			
+			<div class="field">
+				<label>Animation duration</label>
+				<input type="number" name="duration" id="duration" class="plain" value="0" step="10" tabindex="500" />
+			</div>
+			
+			<br />
+			
+			<input type="submit" name="submit" id="submit" value="Go" />
+		
+		</form>		
+	</div>
+	
+	<div id="control_toggle"><span class="cover"></span>|||</div>
+	
+	<div id="output"></div>
+	
+	<script type="text/javascript">img.initialize();</script>
+	
+</body>
+</html>
