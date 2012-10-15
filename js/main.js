@@ -18,6 +18,7 @@ var img = {
 		this.count    = $("#count");
 		this.rotation = $("#rotation");
 		this.duration = $("#duration");
+		this.closed   = false;
 	},
 	
 	build: function() {
@@ -59,7 +60,12 @@ var img = {
 			close +='</div>';
 		}
 		
+		if (this.closed) 
+			 addClass(document.body, "closed");
+		else removeClass(document.body, "closed");
+		
 		this.output.innerHTML = open + close;
+		this.setParams();
 		
 	},
 	
@@ -68,7 +74,10 @@ var img = {
 		var that = this;
 		
 		this.toggle.onclick = function() {
-			toggleClass(document.body, "closed")
+			toggleClass(document.body, "closed");
+			if (that.closed == true) that.closed = false;
+			else that.closed = true;
+			that.setParams();
 		};
 		
 		this.form.onsubmit = function() {
@@ -95,11 +104,37 @@ var img = {
 			params[pair[0]] = pair[1];
 		}
 		
-		var sliders = ["imageurl", "imagesize", "tilesize", "tilemargin", "radius", "tiletint", "tiletintop", "rotate", "blur"];
+		var fields = ["imageurl", "imagesize", "count", "rotation", "duration"];
 		
-		for(var i = 0; i < sliders.length; i++) {
-			if(params[sliders[i]]) $("#" + sliders[i]).val(params[sliders[i]]);
+		for(var i = 0; i < fields.length; i++) {
+			if (params[fields[i]]) {
+				$("#" + fields[i]).value = params[fields[i]];
+			}
 		}
+		
+		if (params["closed"] == "true") this.closed = true;
+		else this.closed = false;
+
+	},
+	
+	setParams: function() {
+		
+		var paramStr = "",
+			params = [
+				{ key: "imageurl",  val: this.url.value },
+				{ key: "imagesize", val: this.size.value },
+				{ key: "count",     val: this.count.value },
+				{ key: "rotation",  val: this.rotation.value },
+				{ key: "duration",  val: this.duration.value },
+				{ key: "closed",    val: this.closed }
+			];
+		
+		for(var i = 0; i < params.length; i++) {
+			if (i > 0 ) paramStr += "&";
+			paramStr += params[i].key + "=" + params[i].val;
+		}
+		
+		window.location.hash = paramStr;
 
 	},
 	
