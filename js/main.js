@@ -8,23 +8,23 @@ var img = {
 	},
 	
 	elements: function() {
-		this.output   = $("#output");
-		this.presets  = $$("#more_list li a");
-		this.toggle   = $("#control_toggle");
-		this.form     = $("#form");
-		this.submit   = $("#submit")
-		this.url      = $("#imageurl");
-		this.size     = $("#imagesize");
-		this.count    = $("#count");
-		this.rotation = $("#rotation");
-		this.duration = $("#duration");
-		this.closed   = false;
+		this.output    = $("#output");
+		this.presets   = $$("#more_list li a");
+		this.toggle    = $("#control_toggle");
+		this.form      = $("#form");
+		this.submit    = $("#submit")
+		this.imageurl  = $("#imageurl");
+		this.imagesize = $("#imagesize");
+		this.count     = $("#count");
+		this.rotation  = $("#rotation");
+		this.duration  = $("#duration");
+		this.closed    = false;
 	},
 	
 	build: function() {
 		
-		var url       = this.url.value
-			imagesize = this.size.value,
+		var url       = this.imageurl.value
+			imagesize = this.imagesize.value,
 			count     = this.count.value,
 			rotation  = this.rotation.value,
 			duration  = this.duration.value,
@@ -60,8 +60,7 @@ var img = {
 			close +='</div>';
 		}
 		
-		if (this.closed) 
-			 addClass(document.body, "closed");
+		if (this.closed) addClass(document.body, "closed");
 		else removeClass(document.body, "closed");
 		
 		this.output.innerHTML = open + close;
@@ -87,7 +86,7 @@ var img = {
 		
 		for(var i = 0; i < this.presets.length; i++) {
 			this.presets[i].onclick = function() {
-				that.url.value = event.target.href;
+				that.imageurl.value = event.target.href;
 				event.preventDefault();
 			}
 		}
@@ -96,7 +95,8 @@ var img = {
 	
 	getParams: function() {
 		
-		var pairs = window.location.hash.replace("#","").split("&"),
+		var pairs  = window.location.hash.replace("#","").split("&"),
+			fields = ["imageurl", "imagesize", "count", "rotation", "duration"],
 			params = {};
 		
 		for(var i = 0; i < pairs.length; i++) {
@@ -104,12 +104,8 @@ var img = {
 			params[pair[0]] = pair[1];
 		}
 		
-		var fields = ["imageurl", "imagesize", "count", "rotation", "duration"];
-		
 		for(var i = 0; i < fields.length; i++) {
-			if (params[fields[i]]) {
-				$("#" + fields[i]).value = params[fields[i]];
-			}
+			if (params[fields[i]]) this[fields[i]].value = params[fields[i]];
 		}
 		
 		if (params["closed"] == "true") this.closed = true;
@@ -121,8 +117,8 @@ var img = {
 		
 		var paramStr = "",
 			params = [
-				{ key: "imageurl",  val: this.url.value },
-				{ key: "imagesize", val: this.size.value },
+				{ key: "imageurl",  val: this.imageurl.value },
+				{ key: "imagesize", val: this.imagesize.value },
 				{ key: "count",     val: this.count.value },
 				{ key: "rotation",  val: this.rotation.value },
 				{ key: "duration",  val: this.duration.value },

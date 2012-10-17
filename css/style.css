@@ -194,18 +194,6 @@ body {
 	margin-left: 125px;
 	min-height: 100%;
 }
-#output #units {
-	
-}
-@-webkit-keyframes rotate {
-	from {
-		-webkit-transform: rotate(0deg);
-	}
-	to { 
-		-webkit-transform: rotate(360deg);
-	}
-}
-
 #output .unit {
 	border-radius: 1000px;
 	position: absolute;
@@ -215,4 +203,12 @@ body {
 }
 .closed #output {
 	margin-left: 0;
+}
+@-webkit-keyframes rotate {
+	from {
+		-webkit-transform: rotate(0deg);
+	}
+	to { 
+		-webkit-transform: rotate(360deg);
+	}
 }
